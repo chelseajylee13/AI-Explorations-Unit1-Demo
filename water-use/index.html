@@ -1,0 +1,103 @@
+<!--
+  Water use visualization — embed
+
+  This page embeds Andy Masley's interactive water-use visual
+  (https://andymasley.com/visuals/water/) via iframe. Unlike the AI prompt
+  footprint calculator in ../ai-prompt-footprint/, this visual has no CC0
+  notice or published source file on its page, so nothing from it is copied
+  here — this is a live embed of his site plus a direct link, not a rebuild.
+-->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How thirsty is AI? — water use visualization</title>
+<style>
+  :root {
+    --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    --text: #1C1E1B;
+    --text-secondary: #4b4e48;
+    --accent: #1f5a7a;
+    --border: #e2e2dd;
+    --bg-subtle: #f7f7f4;
+    --max-width: 900px;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: #fafaf7;
+    font-family: var(--font-body);
+    color: var(--text);
+  }
+  .wrap {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 2rem 1.25rem 3rem;
+  }
+  h1 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  p.dek {
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-top: 0;
+  }
+  p.dek a {
+    color: var(--accent);
+  }
+  .embed-frame {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--bg-subtle);
+  }
+  iframe {
+    display: block;
+    width: 100%;
+    height: 85vh;
+    min-height: 640px;
+    border: 0;
+  }
+  .fallback {
+    padding: 1rem 1.25rem;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    border-top: 1px solid var(--border);
+  }
+  .fallback a {
+    color: var(--accent);
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>How thirsty is AI? — water use visualization</h1>
+      <p class="dek">
+        Interactive comparison of consumptive water use across data centers, AI
+        inference, industries, agriculture, and cities, built by
+        <a href="https://andymasley.com/" target="_blank" rel="noopener">Andy Masley</a>.
+        Embedded live below from
+        <a href="https://andymasley.com/visuals/water/" target="_blank" rel="noopener">andymasley.com/visuals/water</a>
+        — all data, methodology, and citations are his; see the original page for
+        sourcing and updates.
+      </p>
+    </header>
+
+    <div class="embed-frame">
+      <iframe
+        src="https://andymasley.com/visuals/water/"
+        title="Andy Masley's water use visualization"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+      <p class="fallback">
+        If the visualization above doesn't load, view it directly at
+        <a href="https://andymasley.com/visuals/water/" target="_blank" rel="noopener">andymasley.com/visuals/water</a>.
+      </p>
+    </div>
+  </div>
+</body>
+</html>
