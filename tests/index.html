@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Footprint calculator test harness</title>
+  <style>
+    body { max-width: 70rem; margin: 2rem auto; padding: 0 1rem; font: 16px/1.5 system-ui, sans-serif; }
+    .passed { color: #176b35; }
+    .failed { color: #9b1c1c; }
+    li { margin: 0.35rem 0; }
+    code { background: #f3f3f3; padding: 0.1rem 0.25rem; }
+  </style>
+</head>
+<body>
+  <h1>Footprint calculator tests</h1>
+  <p id="summary" aria-live="polite">Running…</p>
+  <ol id="results"></ol>
+  <iframe id="calculator" title="Calculator integration fixture" src="../ai-prompt-footprint/index.html#p=custom&amp;w=7&amp;r=0-3-2" hidden></iframe>
+  <script src="../ai-prompt-footprint/js/source-data.js"></script>
+  <script src="../ai-prompt-footprint/js/calculations.js"></script>
+  <script src="test-runner.js"></script>
+</body>
+</html>

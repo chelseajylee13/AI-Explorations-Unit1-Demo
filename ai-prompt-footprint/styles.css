@@ -1,0 +1,280 @@
+:root {
+    --font-editorial: Georgia, 'Times New Roman', serif;
+    --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    --text: #1C1E1B;
+    --text-secondary: #4b4e48;
+    --dim: #6B6E66;
+    --accent: #1f5a7a;
+    --accent-hover: #164560;
+    --accent-subtle: #e8f0f4;
+    --border: #e2e2dd;
+    --border-strong: #c9cac3;
+    --bg-elevated: #ffffff;
+    --bg-subtle: #f7f7f4;
+    --max-width: 720px;
+  }
+  body { margin: 0; background: #fafaf7; font-family: var(--font-body); }
+  [hidden] { display: none !important; }
+
+.aipf {
+    width: calc(100vw - 48px);
+    position: relative; left: 50%; transform: translateX(-50%);
+    max-width: 1240px;
+    font-family: var(--font-editorial);
+    color: var(--text);
+    padding: 0 0 2.5rem;
+  }
+  .aipf a { color: var(--text); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 2px; }
+  .aipf a:hover { color: var(--accent); }
+  .aipf b { font-weight: 600; color: var(--text); }
+
+  /* ---- Header ---- */
+  /* Align the title + intro with the site nav rule above (the 640px content column),
+     even though the calculator itself breaks out to full width. */
+  .aipf-header { max-width: calc(var(--max-width) - 48px); margin: 0 auto 1.4rem; }
+  .aipf-title {
+    font-family: var(--font-editorial); font-weight: 600;
+    font-size: clamp(1.7rem, 1.2rem + 1.6vw, 2.4rem); line-height: 1.05;
+    letter-spacing: -0.02em; margin: 0;
+  }
+  .aipf-dek { font-size: 0.95rem; line-height: 1.5; color: var(--text-secondary); margin: 0.5rem 0 0; }
+
+  /* ---- Tool: two panes in one frame ---- */
+  .aipf-tool { display: grid; grid-template-columns: 1.35fr 1fr; border: 1px solid var(--border); background: var(--bg-elevated); }
+  .aipf-below { background: var(--bg-elevated); border: 1px solid var(--border); padding: 1.1rem 1.25rem; }
+  .aipf-in { padding: 1.1rem 1.25rem; min-width: 0; }
+  .aipf-out { padding: 1.1rem 1.25rem; border-left: 1px solid var(--border); min-width: 0; background: var(--bg-subtle); }
+
+  .aipf-in-head { display: flex; align-items: baseline; gap: 0.5rem; margin-bottom: 0.7rem; font-weight: 600; font-size: 1rem; }
+  .aipf-period-controls { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 0.35rem; font-family: var(--font-body); }
+  .aipf-period-controls label { display: grid; gap: 0.25rem; color: var(--dim); font-size: 0.72rem; font-weight: 600; }
+  .aipf-period-controls select, .aipf-period-controls input { min-height: 2.1rem; border: 1px solid var(--border); border-radius: 4px; background: var(--paper); color: var(--ink); font: inherit; padding: 0.35rem 0.5rem; }
+  .aipf-period-controls input { width: 8rem; }
+  .aipf-period-note { margin-bottom: 0.75rem; }
+  .aipf-in-sub { font-family: var(--font-body); font-size: 0.7rem; color: var(--dim); letter-spacing: 0.02em; }
+  .aipf-hint { font-family: var(--font-body); font-size: 0.78rem; line-height: 1.5; color: var(--dim); margin: 0 0 0.9rem; }
+  .aipf-writes + .aipf-hint { margin-top: 2rem; padding-top: 1.3rem; border-top: 1px solid var(--border); }
+
+  .aipf-rows-head {
+    display: grid; grid-template-columns: 1fr 1.3fr auto 1.1rem; gap: 0.6rem;
+    font-family: var(--font-body); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.01em;
+    color: var(--text-secondary); padding-bottom: 0.45rem; border-bottom: 1px solid var(--text);
+  }
+  .aipf-rows-head span:nth-child(3) { text-align: center; }
+  .aipf-rowwrap { padding: 0.45rem 0; border-bottom: 1px solid var(--border); }
+  .aipf-row { display: grid; grid-template-columns: 1fr 1.3fr auto 1.1rem; gap: 0.6rem; align-items: center; }
+  .aipf-row-meta { font-family: var(--font-body); font-size: 0.67rem; color: var(--dim); margin-top: 0.3rem; font-variant-numeric: tabular-nums; }
+  .aipf-empty { color: var(--dim); padding: 0.8rem 0; font-size: 0.9rem; }
+  .aipf-rowdel { width: 1.1rem; height: 1.3rem; border: none; background: none; color: var(--dim); font-size: 1.05rem; line-height: 1; cursor: pointer; transition: color 0.12s; }
+  .aipf-rowdel:hover { color: var(--accent); }
+
+  /* Selects look like real fields */
+  .aipf select {
+    font-family: var(--font-body); font-size: 0.85rem; color: var(--text);
+    background-color: var(--bg-subtle); border: 1px solid var(--border-strong);
+    border-radius: 5px; padding: 0.32rem 1.55rem 0.32rem 0.6rem; cursor: pointer; appearance: none; max-width: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='9' height='6' viewBox='0 0 9 6'%3E%3Cpath d='M1 1l3.5 3.5L8 1' stroke='%236B6E66' stroke-width='1.4' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 0.55rem center; transition: border-color 0.12s, background-color 0.12s;
+  }
+  .aipf-row .aipf-rsel { width: 100%; }
+  .aipf select:hover { border-color: var(--accent); }
+  .aipf select:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+  .aipf-stepper { display: inline-flex; align-items: center; gap: 0.2rem; border: 1px solid var(--border-strong); border-radius: 5px; background: var(--bg-subtle); padding: 0 0.1rem; }
+  .aipf-step { width: 1.3rem; height: 1.6rem; border: none; background: none; color: var(--text-secondary); font-size: 1.05rem; line-height: 1; cursor: pointer; font-family: var(--font-body); transition: color 0.12s; }
+  .aipf-step:hover { color: var(--accent); }
+  .aipf-count {
+    width: 4.5ch; border: none; background: transparent;
+    color: var(--text); text-align: center; font-family: var(--font-body); font-size: 0.88rem;
+    font-variant-numeric: tabular-nums; padding: 0.1rem 0;
+  }
+  .aipf-count:focus-visible { outline: none; }
+
+  .aipf-addrow {
+    margin: 0.9rem 0 0; background: none; border: none; padding: 0; color: var(--accent);
+    font-family: var(--font-body); font-size: 0.82rem; cursor: pointer;
+    text-decoration: underline; text-underline-offset: 3px;
+  }
+  .aipf-addrow:hover { color: var(--accent-hover); }
+
+  .aipf-running { margin: 1rem 0 0; padding-top: 0.9rem; border-top: 1px solid var(--border); font-size: 1.05rem; line-height: 1.6; color: var(--text-secondary); }
+  .aipf-tools { margin: 0.6rem 0 0; font-family: var(--font-body); font-size: 0.78rem; color: var(--dim); }
+  .aipf-link { background: none; border: none; padding: 0; font: inherit; color: var(--dim); cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }
+  .aipf-link:hover { color: var(--accent); }
+  .aipf-tools-sep { margin: 0 0.45rem; }
+
+  /* ---- Output pane ---- */
+  .aipf-out-head { display: flex; align-items: baseline; justify-content: space-between; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 1.1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); }
+  .aipf-life { font-size: 0.9rem; line-height: 2; color: var(--text-secondary); margin: 0; flex: 1 1 16rem; }
+  .aipf-nw { white-space: nowrap; }
+  .aipf-life select {
+    font-family: var(--font-body); font-size: 0.84rem; font-weight: 600; color: var(--text);
+    background-color: var(--bg-elevated); border: 1px solid var(--border-strong); border-radius: 5px;
+    padding: 0.14rem 1.35rem 0.14rem 0.5rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='9' height='6' viewBox='0 0 9 6'%3E%3Cpath d='M1 1l3.5 3.5L8 1' stroke='%236B6E66' stroke-width='1.6' fill='none'/%3E%3C/svg%3E");
+    background-position: right 0.45rem center;
+  }
+  .aipf-life select:hover { border-color: var(--accent); color: var(--accent); }
+  .aipf-life select:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+  /* Top toolbar: metric toggle on the left, report button on the right */
+  .aipf-toolbar-top { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem 1rem; flex-wrap: wrap; margin-bottom: 1.1rem; }
+  .aipf-report-btn {
+    background: var(--accent); color: var(--bg-elevated); border: none; border-radius: 6px;
+    padding: 0.5rem 0.95rem; font-family: var(--font-body); font-size: 0.82rem; cursor: pointer;
+    transition: background-color 0.12s; max-width: 17rem; text-align: left;
+    text-wrap: balance; line-height: 1.3;
+  }
+  .aipf-report-btn:hover { background: var(--accent-hover); }
+
+  /* Carbon / water as a prominent segmented toggle above the tool */
+  .aipf-toggle { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0; }
+  .aipf-toggle-label { font-family: var(--font-body); font-size: 0.8rem; color: var(--dim); }
+  .aipf-showing { display: inline-flex; border: 1px solid var(--border-strong); border-radius: 6px; overflow: hidden; font-family: var(--font-body); }
+  .aipf-metric { background: var(--bg-elevated); border: none; padding: 0.44rem 1.05rem; font: inherit; font-size: 0.9rem; color: var(--dim); cursor: pointer; transition: background-color 0.12s, color 0.12s; }
+  .aipf-metric + .aipf-metric { border-left: 1px solid var(--border-strong); }
+  .aipf-metric.is-active { background: var(--accent); color: var(--bg-elevated); font-weight: 600; }
+  .aipf-metric:hover:not(.is-active) { color: var(--text); background: var(--bg-subtle); }
+
+  .aipf-verdict { margin: 0; }
+  .aipf-verdict-fig {
+    font-family: var(--font-editorial); font-weight: 600;
+    font-size: clamp(2.9rem, 2rem + 3.4vw, 4.4rem); line-height: 0.9; letter-spacing: -0.03em;
+    color: var(--text); font-variant-numeric: tabular-nums;
+  }
+  .aipf-verdict-say { font-size: 1.18rem; line-height: 1.25; color: var(--text); margin: 0.35rem 0 0; }
+  .aipf-verdict-detail { font-family: var(--font-body); font-size: 0.78rem; line-height: 1.5; color: var(--dim); margin: 0.6rem 0 0; font-variant-numeric: tabular-nums; }
+  .aipf-words-miles { display: block; margin-top: 0.9rem; padding-top: 0.9rem; border-top: 1px solid var(--border); }
+  .aipf-prop { height: 16px; background: var(--border); margin-top: 0.85rem; overflow: hidden; }
+  .aipf-prop-fill { height: 100%; background: var(--accent); min-width: 3px; }
+  .aipf-prop-cap { display: flex; justify-content: space-between; font-family: var(--font-body); font-size: 0.62rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--dim); margin-top: 0.35rem; }
+  .aipf-prop-cap .accent { color: var(--accent); font-weight: 600; }
+
+  .aipf-onepct { font-size: 0.88rem; line-height: 1.5; color: var(--text-secondary); margin: 0.85rem 0 0; }
+  .aipf-fine { font-family: var(--font-body); font-size: 0.7rem; line-height: 1.45; color: var(--dim); margin: 0.7rem 0 0; }
+
+  .aipf-mini { margin-top: 1.1rem; padding-top: 0.9rem; border-top: 1px solid var(--border); }
+  .aipf-chart-title { font-family: var(--font-body); font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-secondary); margin: 0 0 0.3rem; }
+  .aipf-mini-h { font-family: var(--font-body); font-size: 0.72rem; color: var(--dim); margin: 0 0 0.7rem; }
+
+  /* ---- 'What it writes' under the totals ---- */
+  .aipf-writes { margin-top: 1rem; padding-top: 0.9rem; border-top: 1px solid var(--border); }
+  .aipf-writes-h { font-family: var(--font-body); font-size: 0.72rem; color: var(--dim); margin: 0 0 0.4rem; }
+
+  /* ---- Below: a year against bigger choices (full width) ---- */
+  .aipf-below { margin-top: 1.25rem; }
+  .aipf-h2 { font-family: var(--font-editorial); font-weight: 600; font-size: 1.1rem; letter-spacing: -0.01em; margin: 0 0 0.6rem; }
+  .aipf-sub { font-size: 0.85rem; line-height: 1.5; color: var(--text-secondary); margin: 0 0 0.9rem; }
+  .aipf-sub strong, .aipf-running b { color: var(--text); }
+  .aipf-words { font-size: 1rem; line-height: 1.65; color: var(--text-secondary); margin: 0; }
+  .aipf-words-code { display: block; margin-top: 0.7rem; }
+
+  /* ---- Bars: squared, ink, on a baseline. Inline by default (annual). ---- */
+  .aipf-bar-row { display: grid; grid-template-columns: 13rem 1fr auto; align-items: center; gap: 0.8rem; padding: 0.4rem 0; }
+  .aipf-bar-label { font-family: var(--font-body); font-size: 0.84rem; color: var(--text-secondary); }
+  .aipf-bar-row.is-focal .aipf-bar-label { color: var(--text); font-weight: 600; }
+  .aipf-bar-row.is-focal { background: var(--accent-subtle); margin: 0.15rem -0.6rem; padding: 0.4rem 0.6rem; border-radius: 4px; }
+  .aipf-bar-track { height: 12px; background: var(--border); }
+  .aipf-bar-fill { height: 100%; background: var(--dim); }
+  .aipf-bar-row.is-focal .aipf-bar-fill { background: var(--accent); min-width: 3px; }
+  .aipf-bar-val { font-family: var(--font-body); font-size: 0.8rem; color: var(--dim); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .aipf-bar-row.is-focal .aipf-bar-val { color: var(--text); font-weight: 600; }
+  .aipf-tag { font-family: var(--font-body); font-size: 0.62rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; white-space: nowrap; }
+  .aipf-tag--save { color: var(--accent); }
+  .aipf-tag--add { color: #b05a37; }
+  [data-theme="dark"] .aipf-tag--add { color: #d98a63; }
+
+  /* Compact bars (daily mini): name + value on top, bar beneath */
+  .aipf-bars--compact .aipf-bar-row { grid-template-columns: 1fr auto; grid-template-areas: "label value" "bar bar"; gap: 0.18rem 0.5rem; padding: 0.42rem 0; }
+  .aipf-bars--compact .aipf-bar-label { grid-area: label; font-size: 0.84rem; }
+  .aipf-bars--compact .aipf-bar-val { grid-area: value; }
+  .aipf-bars--compact .aipf-bar-track { grid-area: bar; height: 11px; }
+  .aipf-bars--compact .aipf-bar-row.is-focal { padding: 0.45rem 0.6rem; }
+  .aipf-bars--compact .aipf-bar-row.is-focal .aipf-bar-track { height: 13px; }
+
+  /* ---- Methodology ---- */
+  .aipf-method { margin-top: 1.75rem; border-top: 1px solid var(--border); padding-top: 1.1rem; max-width: 44rem; }
+  .aipf-method summary { cursor: pointer; font-family: var(--font-editorial); font-style: italic; font-size: 0.98rem; color: var(--text); }
+  .aipf-method summary:hover { color: var(--accent); }
+  .aipf-method-body { margin-top: 1rem; }
+  .aipf-method-body p { font-family: var(--font-body); font-size: 0.82rem; line-height: 1.65; color: var(--text-secondary); margin: 0 0 0.8rem; }
+  .aipf-method-caveat { font-family: var(--font-editorial) !important; font-size: 0.95rem !important; font-style: italic; color: var(--text-secondary) !important; }
+  .aipf-method-body code { font-size: 0.78rem; background: var(--bg-subtle); border: 1px solid var(--border); border-radius: 3px; padding: 0.05rem 0.3rem; }
+  .aipf-embed-pre { background: var(--bg-subtle); border: 1px solid var(--border); border-radius: 5px; padding: 0.8rem 0.95rem; overflow-x: auto; margin: 0 0 0.8rem; }
+  .aipf-embed-pre code { font-size: 0.74rem; line-height: 1.55; background: none; border: none; border-radius: 0; padding: 0; color: var(--text-secondary); white-space: pre; }
+  .aipf-buildnote { font-family: var(--font-editorial); font-style: italic; font-size: 0.92rem; line-height: 1.6; color: var(--text-secondary); margin: 2rem 0 0; max-width: 44rem; }
+  .aipf-permission { font-family: var(--font-body); font-size: 0.62rem; line-height: 1.5; color: var(--dim); margin: 1.5rem 0 0; max-width: 44rem; }
+  .aipf-cc0 { display: flex; align-items: center; gap: 0.7rem; margin: 0.7rem 0 0; max-width: 44rem; font-family: var(--font-body); font-size: 0.62rem; line-height: 1.5; color: var(--dim); }
+  .aipf-cc0 img { display: block; flex-shrink: 0; }
+
+  /* ---- Feature: usage presets ---- */
+  .aipf-presets { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0 0 0.9rem; }
+  .aipf-preset-btn {
+    font-family: var(--font-body); font-size: 0.78rem; padding: 0.35rem 0.75rem;
+    border: 1px solid var(--border-strong); border-radius: 999px; background: var(--bg-elevated);
+    color: var(--text-secondary); cursor: pointer; transition: border-color 0.12s, color 0.12s;
+  }
+  .aipf-preset-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* ---- Feature: impact badges ---- */
+  .aipf-badge {
+    display: inline-block; font-family: var(--font-body); font-size: 0.72rem; font-weight: 700;
+    padding: 0.12rem 0.55rem; border-radius: 999px; vertical-align: middle; white-space: nowrap;
+  }
+  .aipf-badge--low { background: #e3f3e3; color: #1e6b2e; }
+  .aipf-badge--moderate { background: #fdf1d0; color: #8a6100; }
+  .aipf-badge--high { background: #fce3d0; color: #9a4a12; }
+  .aipf-badge--veryhigh { background: #fbdada; color: #a3241f; }
+  .aipf-impact-line { display: block; font-size: 1rem; margin-bottom: 0.5rem; }
+
+  /* ---- Feature: model comparison table ---- */
+  .aipf-table-wrap { overflow-x: auto; }
+  .aipf-cmp-table { width: 100%; border-collapse: collapse; font-family: var(--font-body); font-size: 0.82rem; }
+  .aipf-cmp-table th, .aipf-cmp-table td { text-align: left; padding: 0.4rem 0.6rem; border-bottom: 1px solid var(--border); }
+  .aipf-cmp-table th.n, .aipf-cmp-table td.n { text-align: right; font-variant-numeric: tabular-nums; }
+  .aipf-cmp-table th { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.03em; color: var(--text-secondary); }
+  .aipf-cmp-row--used { background: var(--accent-subtle); }
+  .aipf-cmp-used-tag { font-size: 0.65rem; color: var(--accent); margin-left: 0.4rem; }
+  #aipf-cmp-size { font-family: var(--font-body); }
+
+  /* ---- Responsive ---- */
+  @media (max-width: 820px) {
+    .aipf { width: calc(100vw - 32px); }
+    .aipf-tool { grid-template-columns: 1fr; }
+    .aipf-out { border-left: none; border-top: 1px solid var(--border); }
+    .aipf-below { grid-template-columns: 1fr; gap: 1.5rem; }
+  }
+  @media (max-width: 640px) {
+    /* All bars stack so long labels and values fit; assign the grid areas the
+       stacked template needs (the base bars did not have them set). */
+    .aipf-bar-row { grid-template-columns: 1fr auto; grid-template-areas: "label value" "bar bar"; gap: 0.15rem 0.5rem; }
+    .aipf-bar-label { grid-area: label; }
+    .aipf-bar-val { grid-area: value; align-self: center; }
+    .aipf-bar-track { grid-area: bar; }
+    .aipf-rows-head { display: none; }
+    .aipf-row { grid-template-columns: 1fr auto; grid-template-areas: "model model" "size size" "stepper del"; gap: 0.5rem 0.6rem; align-items: center; }
+    .aipf-row .aipf-rsel:first-child { grid-area: model; }
+    .aipf-row .aipf-rsel:nth-child(2) { grid-area: size; }
+    .aipf-row .aipf-stepper { grid-area: stepper; justify-self: start; }
+    .aipf-row .aipf-rowdel { grid-area: del; justify-self: end; }
+    .aipf-report-btn { max-width: none; width: 100%; text-align: center; }
+  }
+  @media (max-width: 560px) {
+    .aipf { width: calc(100vw - 24px); }
+    /* Usage rows: full-width model and output selects, with the counter and the
+       remove button on their own line, so nothing is squeezed or truncated. */
+    .aipf-rows-head { display: none; }
+    .aipf-row { grid-template-columns: 1fr auto; grid-template-areas: "model model" "size size" "stepper del"; gap: 0.5rem 0.6rem; align-items: center; }
+    .aipf-row .aipf-rsel:first-child { grid-area: model; }
+    .aipf-row .aipf-rsel:nth-child(2) { grid-area: size; }
+    .aipf-row .aipf-stepper { grid-area: stepper; justify-self: start; }
+    .aipf-row .aipf-rowdel { grid-area: del; justify-self: end; }
+    /* Bigger touch targets */
+    .aipf-step { width: 2rem; height: 2rem; font-size: 1.15rem; }
+    .aipf-count { width: 3ch; height: 2rem; font-size: 0.95rem; }
+    .aipf-rowdel { width: 2rem; height: 2rem; font-size: 1.3rem; }
+    /* Report button: full width and easy to tap */
+    .aipf-report-btn { max-width: none; width: 100%; text-align: center; }
+    .aipf-cc0 { align-items: flex-start; }
+  }
+  @media (prefers-reduced-motion: reduce) { .aipf-prop-fill, .aipf select, .aipf-step, .aipf-metric, .aipf-link { transition: none; } }
