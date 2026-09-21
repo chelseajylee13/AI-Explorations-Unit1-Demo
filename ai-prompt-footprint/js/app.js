@@ -195,7 +195,7 @@
       const ctrl = el('div', 'aipf-stepper');
       const minus = el('button', 'aipf-step', '−'); minus.type = 'button'; minus.setAttribute('aria-label', 'Fewer');
       const input = document.createElement('input');
-      input.type = 'text'; input.inputMode = 'numeric'; input.className = 'aipf-count'; input.value = String(row.count || 0); input.setAttribute('aria-label', 'Per day');
+      input.type = 'text'; input.inputMode = 'numeric'; input.className = 'aipf-count'; input.value = String(row.count || 0); input.setAttribute('aria-label', 'Prompts in reporting period');
       const plus = el('button', 'aipf-step', '+'); plus.type = 'button'; plus.setAttribute('aria-label', 'More');
       minus.addEventListener('click', () => bump(row, input, -1));
       plus.addEventListener('click', () => bump(row, input, 1));
@@ -372,6 +372,17 @@
 
     function updateOutputs() {
       renderPeriodControls(); renderRunning(); updateRowMeta(); renderHeadline(); renderGridNote(); renderWords(); renderPeriodContext(); renderModelTable();
+      const carbon = aiPeriodTriple('carbon');
+      const water = aiPeriodTriple('water');
+      document.dispatchEvent(new CustomEvent('footprint:text-update', { detail: {
+        carbon: calculations.scenario(carbon[1], carbon[0], carbon[2]),
+        water: calculations.scenario(water[1], water[0], water[2]),
+        periodId: state.period,
+        periodLabel: periodLabel(),
+        customDays: state.customDays,
+        gridFactor: getLoc().grid,
+        regionLabel: getLoc().label,
+      } }));
     }
     // ---- Cited report ----
     function escXml(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
@@ -433,6 +444,7 @@
         '<h2>4. Partial water estimate</h2>' +
         '<p>Supported components consume about <strong>' + fmtWater(water) + '</strong> (documented scenarios ' + fmtWater(waterLower) + ' to ' + fmtWater(waterUpper) + '). Water is kept separate from carbon and uses a consumption boundary.' + footnote(1) + '</p>' +
         '<h2>5. Water context</h2>' + reportBarsSVG(waterRows, fmtWater) +
+        (globalThis.FootprintFeatureReport ? globalThis.FootprintFeatureReport() : '<p class="muted">Expanded activity rows were not available when this report was generated.</p>') +
         '<h2>References</h2><ol class="refs">' + refsHtml + '</ol>' +
         '</body></html>';
     }
@@ -448,10 +460,10 @@
     }
     function bindEvents() {
       root.querySelector('#aipf-addrow').addEventListener('click', () => { state.rows.push({ uid: uidSeq++, model: 'gpt-5.5', size: 'chat', count: 1 }); renderRows(); updateOutputs(); });
-      root.querySelector('#aipf-reset').addEventListener('click', () => { state.period = 'workweek'; state.customDays = 5; setDefaultRows(); renderRows(); updateOutputs(); });
+      root.querySelector('#aipf-reset').addEventListener('click', () => { state.period = 'workweek'; state.customDays = 5; setDefaultRows(); renderRows(); document.dispatchEvent(new CustomEvent('footprint:reset')); updateOutputs(); });
       root.querySelector('#aipf-share').addEventListener('click', (e) => {
         const btn = e.currentTarget;
-        const done = () => { btn.textContent = 'Link copied'; setTimeout(() => { btn.textContent = 'Copy a link to this estimate'; }, 1800); };
+        const done = () => { btn.textContent = 'Text-use link copied'; setTimeout(() => { btn.textContent = 'Copy text-use link'; }, 1800); };
         try { if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(buildShareURL()).then(done, done); else done(); } catch (err) { done(); }
       });
       const rb = root.querySelector('#aipf-report'); if (rb) rb.addEventListener('click', generateReport);

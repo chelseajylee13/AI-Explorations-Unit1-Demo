@@ -4,11 +4,9 @@
   Adapted from Andy Masley's CC0-licensed calculator
   (https://andymasley.com/visuals/ai-prompt-footprint/, source at
   https://andymasley.com/visuals/ai-prompt-footprint-source.txt) so it can run
-  outside his site's Astro build. Original behavior (rows, daily/annual
-  carbon & water, comparisons, cited report) is unchanged; this build adds:
-    1. a model comparison table (compare all models by footprint)
-    2. usage preset buttons (quick-fill common usage patterns)
-    3. color-coded impact badges (green/yellow/orange/red)
+  outside his site's Astro build. This expanded build preserves text-model
+  comparison and cited-report behavior while adding explicit reporting periods,
+  professional AI activities, broader digital activities, and model scenarios.
   Methodology, citations, and the CC0 notice below are kept as in the original.
 -->
 <!doctype html>
@@ -88,7 +86,7 @@
         <p class="aipf-tools">
           <button type="button" class="aipf-link" id="aipf-reset">Reset</button>
           <span class="aipf-tools-sep">·</span>
-          <button type="button" class="aipf-link" id="aipf-share">Copy link</button>
+          <button type="button" class="aipf-link" id="aipf-share" title="The link preserves text-prompt entries and reporting context only.">Copy text-use link</button>
         </p>
       </div>
 
@@ -114,6 +112,62 @@
         <p class="aipf-fine">*A note on the Claude models: Anthropic has never said how Claude is built, so EcoLogits has to guess. Its guess is that Claude Opus and Sonnet only use a fraction of their parameters at a time. Some people who follow this closely think Claude actually uses all of them on every token, and if that's right, the Claude numbers here are too low. <a href="#methodology" onclick="document.getElementById('methodology').open=true">More in the methodology below</a>.</p>
       </div>
     </div>
+
+    <section class="impact-workspace" id="impact-workspace" aria-labelledby="impact-workspace-title">
+      <div class="impact-intro">
+        <p class="impact-kicker">Complete activity estimate</p>
+        <h2 id="impact-workspace-title">Add professional AI and broader digital activities</h2>
+        <p>All entries are totals for the reporting period selected above. Lower, central, and upper values are documented model scenarios—not confidence intervals, best/worst cases, or guarantees.</p>
+      </div>
+
+      <div class="impact-scenario" role="group" aria-label="Displayed model scenario">
+        <span>Show scenario</span>
+        <button type="button" data-scenario="lower">Lower</button>
+        <button type="button" class="is-active" data-scenario="central">Central</button>
+        <button type="button" data-scenario="upper">Upper</button>
+      </div>
+      <div class="impact-examples" role="group" aria-label="Load a reference workflow">
+        <span>Try an example</span>
+        <button type="button" data-example="alex">Alex · production</button>
+        <button type="button" data-example="jordan">Jordan · technical project</button>
+        <button type="button" data-example="robin">Robin · operations</button>
+      </div>
+
+      <div class="impact-summary" id="impact-summary" aria-live="polite"></div>
+
+      <section class="impact-group" aria-labelledby="professional-ai-title">
+        <div class="impact-group-head">
+          <div><p class="impact-kicker">Professional AI</p><h3 id="professional-ai-title">Images, video, and project workloads</h3></div>
+        </div>
+        <div class="impact-feature">
+          <div class="impact-feature-head"><div><h4>Image and video generation</h4><p>Image entries remain visible but not estimated until the approved per-model data are available. Supported video settings use frozen EcoLogits 0.11.1 records.</p></div><button type="button" data-add="media">+ Add generation</button></div>
+          <div id="media-rows" class="impact-rows"></div>
+        </div>
+        <div class="impact-feature">
+          <div class="impact-feature-head"><div><h4>Project-based AI workload</h4><p>Use provider records when available, or build an explicit estimate from runs, calls, retries, and workdays.</p></div><button type="button" data-add="workload">+ Add workload</button></div>
+          <div id="workload-rows" class="impact-rows"></div>
+        </div>
+      </section>
+
+      <section class="impact-group" aria-labelledby="digital-title">
+        <div class="impact-group-head"><div><p class="impact-kicker">Broader digital life</p><h3 id="digital-title">Meetings, media, social use, and gaming</h3></div></div>
+        <div class="impact-feature">
+          <div class="impact-feature-head"><div><h4>Whole-meeting footprint</h4><p>Each result represents the entire meeting, not one attendee’s allocation. Do not enter the same meeting in multiple employee records.</p></div><button type="button" data-add="meeting">+ Add meeting</button></div>
+          <div id="meeting-rows" class="impact-rows"></div>
+        </div>
+        <div class="impact-feature">
+          <div class="impact-feature-head"><div><h4>Digital media and recreation</h4><p>Local device energy stays separate from source-specific infrastructure assumptions. Water is not estimated for these activities.</p></div><button type="button" data-add="digital">+ Add activity</button></div>
+          <div id="digital-rows" class="impact-rows"></div>
+        </div>
+      </section>
+
+      <details class="impact-assumptions" open>
+        <summary>Assumptions, sensitivity, sources, and coverage</summary>
+        <div id="impact-sensitivity"></div>
+        <div id="impact-sources"></div>
+      </details>
+      <p id="impact-status" class="sr-only" aria-live="polite"></p>
+    </section>
 
     <div class="aipf-below" aria-label="Compare models by footprint">
       <h2 class="aipf-h2">Compare models by footprint</h2>
@@ -319,7 +373,9 @@
     </p>
   </article>
   <script src="js/source-data.js"></script>
+  <script src="js/feature-data.js"></script>
   <script src="js/calculations.js"></script>
   <script src="js/app.js"></script>
+  <script src="js/feature-app.js"></script>
 </body>
 </html>

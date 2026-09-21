@@ -381,6 +381,7 @@ If implementation changes the intended result, update the specification and reco
 | Date | Change | Reason | Approval |
 | --- | --- | --- | --- |
 | September 20, 2026 | Initial five-feature technical specification drafted from the approved research. | Establish the product behavior, calculations, evidence boundaries, uncertainty treatment, interface expectations, and acceptance checks before planning. | Approved by the user on September 20, 2026 |
+| September 21, 2026 | Until the Bertazzini et al. companion measurements are obtained, keep image-generation entry and evidence-gap disclosure but report its electricity, carbon, and water as `Not estimated`. Continue the supported video calculation and the other four features; do not infer image coefficients from chart pixels or the paper's overall range. | The repository contains no per-model/per-resolution companion table, and the user chose to continue with an explicit missing-evidence result rather than pause the build. | Approved by the user on September 21, 2026 |
 
 ## Commands
 
