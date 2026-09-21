@@ -84,6 +84,7 @@ Record material changes to the approach, sequence, or checklist and explain why 
 | --- | --- | --- | --- |
 | September 21, 2026 | Drafted the implementation approach and ordered task sequence; selected modular local assets and a browser-native automated test harness. | The baseline is a tightly coupled 1,296-line single file, and Node.js is unavailable. Separating source data and pure calculations supports the specification's auditability and fixture requirements without adding a runtime dependency. | Approved by the user on September 21, 2026 |
 | September 21, 2026 | Removed the tracked contents of the out-of-scope `water-use/` directory but retained `__MACOSX/` unchanged. An empty OneDrive placeholder named `water-use/` remains because Windows denied removal twice. | The user approved deleting only the unrelated bonus calculator, directed that the metadata directory remain untouched, and approved continuing with the empty placeholder after the access failure was reported. | Approved by the user on September 21, 2026 |
+| September 21, 2026 | Freeze the exact EcoLogits `0.11.1` video inputs now, but hold image calculations until the Bertazzini et al. companion measurements are available. Do not infer the missing 17-model by 3-resolution values from chart pixels. | The paper's arXiv source package has figures and summary values but no machine-readable per-model/per-resolution measurement table. Obtaining the authors' data is the only reviewed option that preserves the specification's auditability and no-inferred-coefficient constraint. | The user directed the agent to choose the best option and approved proceeding on September 21, 2026 |
 
 ## Implementation records
 
@@ -101,6 +102,13 @@ Record material changes to the approach, sequence, or checklist and explain why 
 - Replaced daily inputs and automatic 365-day annualization with explicit `Single project`, `Workweek`, and `Custom period` labels. Text-prompt counts remain unchanged when the label changes. Updated URL restoration, visible totals, comparison context, reset behavior, and the cited report to use selected-period semantics.
 - Added the browser-native harness in `tests/`. Headless Microsoft Edge passed all 12 accumulated fixtures covering the recovered model table, baseline carbon and water calculations, unit conversion, unrounded scaling, aggregation, fixed scenarios, zero and invalid inputs, period invariance and validation, URL restoration, and report non-annualization.
 - Captured `tests/evidence/automated-harness.png`, `period-desktop.png`, and `period-narrow.png`. Corrected narrow-row overflow and confirmed irrelevant custom-period controls remain hidden. `git diff --check` reported no whitespace errors; the common secret-pattern scan found no matches.
+
+### September 21, 2026 Feature 1 source-freeze checkpoint (partial)
+
+- Pinned the complete EcoLogits `0.11.1` video-model and electricity-mix datasets from commit `886d1ebfadb51a2d6407fcea6d9778c997c85c35`. Stored byte-identical local copies, their SHA-256 hashes, source boundaries, scenario roles, geography, derivation, evidence labels, and limitations.
+- Confirmed the video dataset contains 17 models, eight provider configurations, and four hardware configurations. The pinned provider records resolve video operation to USA or Singapore electricity factors and include their PUE/WUE assumptions.
+- Inspected the Bertazzini et al. arXiv source package. It does not include the numeric per-model/per-resolution observations required by the approved image method, so no image coefficient was inferred or stored. Added an explicit pending source record and a concise, ready-to-send author request for the companion data.
+- Kept the overall source-freeze checklist item open because the approved image table remains unresolved. Feature 1 image calculations and interface work remain on hold until that source gap is closed.
 
 ## Commands
 

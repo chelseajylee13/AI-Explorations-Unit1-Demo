@@ -1,0 +1,56 @@
+{
+  "schema_version": "1.0.0",
+  "records": [
+    {
+      "id": "ecologits-video-models-0.11.1",
+      "value": "video_models.json",
+      "unit": "upstream dataset",
+      "boundary": "EcoLogits video-generation model, provider, hardware-power, hardware-embodied-impact, capability, and latency-regression inputs",
+      "source_title": "EcoLogits 0.11.1 — ecologits/data/video_models.json",
+      "source_link": "https://github.com/mlco2/ecologits/blob/886d1ebfadb51a2d6407fcea6d9778c997c85c35/ecologits/data/video_models.json",
+      "publication_or_release_date": "2026-07-07",
+      "pinned_version": "0.11.1",
+      "pinned_commit": "886d1ebfadb51a2d6407fcea6d9778c997c85c35",
+      "sha256": "23892ab10eb3c53d00e8d9eec79abfb1dd3e9357b2d020c4af2578dc7fb55a0b",
+      "geography": "Provider-specific defaults: USA or Singapore, depending on model provider",
+      "scenario_role": "Source lower and upper machine-power bounds; calculator central scenario will be their midpoint",
+      "derivation": "Byte-identical copy from the pinned EcoLogits release; no coefficients transformed",
+      "evidence_label": "Moderate",
+      "limitations": "Some proprietary-model regressions are extrapolations; provider hardware, location, PUE, and WUE can be assumptions. The method attributes the whole assigned machine to a request. See EcoLogits warnings and methodology before display."
+    },
+    {
+      "id": "ecologits-electricity-mixes-0.11.1",
+      "value": "electricity_mixes.json",
+      "unit": "upstream dataset",
+      "boundary": "EcoLogits electricity-generation GWP, primary-energy, abiotic-depletion, and water-consumption factors by geographic zone",
+      "source_title": "EcoLogits 0.11.1 — ecologits/data/electricity_mixes.json",
+      "source_link": "https://github.com/mlco2/ecologits/blob/886d1ebfadb51a2d6407fcea6d9778c997c85c35/ecologits/data/electricity_mixes.json",
+      "publication_or_release_date": "2026-07-07",
+      "pinned_version": "0.11.1",
+      "pinned_commit": "886d1ebfadb51a2d6407fcea6d9778c997c85c35",
+      "sha256": "e6433ae79645719812067079f3d20a6a8420c8b8e5406fccc94f73c9421fe917",
+      "geography": "Worldwide country and region table; video provider defaults currently resolve to USA or Singapore",
+      "scenario_role": "Provider-location operational carbon and electricity-generation water factors",
+      "derivation": "Byte-identical copy from the pinned EcoLogits release; no coefficients transformed",
+      "evidence_label": "Moderate",
+      "limitations": "Geographic factors are averages and some zones use world defaults with warnings. They do not identify an individual request's actual data-center electricity supply."
+    },
+    {
+      "id": "bertazzini-image-energy-2025-pending",
+      "value": null,
+      "unit": "kWh per generated image",
+      "boundary": "RTX 4090 workstation electricity measured during generation for 17 open diffusion models and three tested resolutions",
+      "source_title": "The Hidden Cost of an Image: Quantifying the Energy Consumption of AI Image Generation",
+      "source_link": "https://arxiv.org/abs/2506.17016",
+      "publication_or_release_date": "2025-06-20",
+      "pinned_version": "arXiv:2506.17016v1",
+      "pinned_commit": null,
+      "sha256": null,
+      "geography": "Not used for carbon conversion; energy was measured on one RTX 4090 workstation",
+      "scenario_role": "Pending per-model, per-resolution lower, median, and upper source values",
+      "derivation": "Not transcribed. The arXiv package contains figures but no machine-readable observation table, and chart-pixel digitization would introduce inferred coefficients prohibited by the specification.",
+      "evidence_label": "Pending",
+      "limitations": "The paper reports more than 9,000 measurements and an overall all-setting model-median span of 0.000086–0.00408 kWh/image, but those summary values cannot populate the required 17-by-3 table. Image calculations must remain disabled until exact companion data are obtained."
+    }
+  ]
+}
